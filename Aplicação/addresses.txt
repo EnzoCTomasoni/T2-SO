@@ -1,0 +1,25 @@
+0x0000
+1
+65535
+65000
+57344
+1024       # Page 0, deve gerar page fault e carregar da backing store
+2048       # Page 0, deve ser hit (TLB ou Page Table)
+8192       # Page 2, novo page fault
+12288      # Page 3, novo page fault
+2048       # Repetição, deve ser TLB hit
+4096       # Page 1, novo page fault
+4096       # Repetição, deve ser TLB hit
+32767      # Último endereço 16 bits, testando limites
+131072     # Page 32, novo page fault
+132096     # Page 32 com offset, deve ser page hit ou TLB hit
+196608     # Page 48, novo page fault
+262144     # Page 64, novo page fault
+132096     # Repetição, deve ser TLB hit se ainda estiver na TLB
+4194304    # Page 1024, deve ser page fault (nível 1 novo)
+4202496    # Page 1026, novo page fault (nível 1 já alocado)
+4202496    # Repetição, deve ser hit
+0          # Volta para o início
+131072     # Reforça a Segunda Chance
+262144     # Reacesso
+0x00010020
